@@ -1,0 +1,61 @@
+---
+import Home from '../layouts/Home.astro'
+import Donate from '@/components/vue/Donate'
+import ListRelatedPosts from '@/components/ListRelatedPosts'
+import TOC from '@/components/TOC'
+import BaseLayout from './BaseLayout.astro'
+import dayjs from 'dayjs'
+import config from '../config'
+
+const { frontmatter, headings } = Astro.props
+
+const codingPosts = await Astro.glob('../pages/coding/*.md')
+const blogPosts = await Astro.glob('../pages/blog/*.md')
+const reship = await Astro.glob('../pages/reship/*.md')
+const posts = [...codingPosts, ...blogPosts, ...reship]
+
+const filteredPosts = posts.filter(
+  (post) =>
+    post.frontmatter.categories.join(',') === frontmatter.categories.join(',') &&
+    post.frontmatter.title !== frontmatter.title
+)
+
+// random
+filteredPosts.sort(() => Math.random() - 0.5)
+const relatedPosts = filteredPosts.slice(0, 4)
+---
+
+<BaseLayout
+  title={`${frontmatter.title} | ${config.title}`}
+  ogType="article"
+  ogDescription={frontmatter.ogDescription}
+  ogImage={frontmatter.ogImage}
+>
+  <Home title="素履以往">
+    <div
+      id="markdown-body"
+      class="markdown-body markdown-width bg-crystalClear dark:bg-markerShadow p-5 rounded-md dark:text-snowfallWhite"
+    >
+      <h1>{frontmatter.title}</h1>
+      <div class="text-slate-500"></div>
+      <div class="text-slate-500">
+        <span class="categories">
+          <i class="iconfont icon-clock-outlined"></i>
+          <span style="margin-left:5px">{dayjs(frontmatter.date).format('YYYY/MM/DD')}</span>
+          <span style="margin-left:15px">
+            <i class="iconfont icon-category"></i>
+            <span style="margin-left:5px">{frontmatter.categories}</span></span
+          >
+        </span>
+      </div>
+      <slot />
+    </div>
+    <div>
+      <ListRelatedPosts posts={relatedPosts} />
+    </div>
+    <div>
+      <Donate client:only="vue" />
+    </div>
+    <div slot="catalogue"><TOC headings={headings} frontmatter={frontmatter} /></div>
+  </Home>
+</BaseLayout>

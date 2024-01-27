@@ -1,0 +1,23 @@
+---
+import ArticleList from './ArticleList.astro'
+import MobileArticleList from './MobileArticleList.astro'
+
+const codingPosts = await Astro.glob('../pages/coding/*.md')
+const blogPosts = await Astro.glob('../pages/blog/*.md')
+const reship = await Astro.glob('../pages/reship/*.md')
+
+const posts = [...codingPosts, ...blogPosts, ...reship]
+
+posts.sort((a, b) => {
+  //@ts-ignore
+  return new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
+})
+---
+
+<div class="desktop">
+  <ArticleList posts={posts} />
+</div>
+
+<div class="mobile">
+  <MobileArticleList posts={posts} />
+</div>

@@ -1,0 +1,107 @@
+// font-display: https://developer.mozilla.org/zh-cn/docs/Web/CSS/@font-face/font-display
+
+@font-face {
+  font-family: "iconfont";
+
+  src:
+    url("//at.alicdn.com/t/c/font_64825_p79jvio1bx.woff2?t=1691503777660") format("woff2"),
+    url("//at.alicdn.com/t/c/font_64825_p79jvio1bx.woff?t=1691503777660") format("woff"),
+    url("//at.alicdn.com/t/c/font_64825_p79jvio1bx.ttf?t=1691503777660") format("truetype");
+}
+
+
+@font-face {
+  font-family: SpecialSymbol;
+  src: local('PingFang SC'), local('Microsoft Yahei');
+  unicode-range: U+02C2, U+02C3, U+003C, U+003E, U+3009;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Monda;
+  src: url('/public/fonts/Monda-Regular.ttf');
+  unicode-range: U+21-3B, U+3D, U+3F-5F, U+61-7D;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'SFMono-Regular';
+  src: url('/public/fonts/SFMonoRegular.otf') format('opentype');
+}
+
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 15px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-github:before {
+  content: "\e689";
+}
+
+.icon-instagram:before {
+  content: "\e8a1";
+}
+
+.icon-quill:before {
+  content: "\e6ad";
+}
+
+.icon-h-1:before {
+  content: "\e786";
+}
+
+.icon-h-2:before {
+  content: "\e787";
+}
+
+.icon-h-4:before {
+  content: "\e788";
+}
+
+.icon-h-3:before {
+  content: "\e789";
+}
+
+.icon-h-6:before {
+  content: "\e78a";
+}
+
+.icon-h-5:before {
+  content: "\e78b";
+}
+
+.icon-clock-outlined:before {
+  content: "\e815";
+}
+
+.icon-category:before {
+  content: "\e635";
+}
+
+.icon-menu:before {
+  content: '\e625';
+}
+
+.icon-moon:before {
+  content: '\e63e';
+}
+
+.icon-sun:before {
+  content: '\e68b';
+}
+
+.icon-search:before {
+  content: '\e60e';
+}
+
+.icon-next::before {
+  content: "";
+}
+
+.icon-prev::before {
+  content: "";
+}

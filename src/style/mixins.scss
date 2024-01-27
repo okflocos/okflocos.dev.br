@@ -1,0 +1,91 @@
+@function is-important($important) {
+  @return #{if($important, "!important", "")};
+}
+
+/// Hidden element
+@mixin hidden($important: false) {
+  opacity: 0 is-important($important);
+  visibility: hidden is-important($important);
+}
+
+@function is-important($important) {
+  @return #{if($important, "!important", "")};
+}
+
+/// Text underline
+@mixin text-underline($offset: 0.3em) {
+  text-decoration: underline;
+  text-underline-offset: $offset;
+  text-decoration-thickness: from-font;
+}
+
+/// Visible element
+@mixin visible($important: false) {
+  opacity: 1 is-important($important);
+  visibility: visible is-important($important);
+}
+
+/// Hidden element
+@mixin hidden($important: false) {
+  opacity: 0 is-important($important);
+  visibility: hidden is-important($important);
+}
+
+/// BackgroundColor transition
+@mixin background-transition($time: 0.1s) {
+  transition: background-color $time;
+}
+
+// Scrollbar
+/// @param {Size} $size
+/// @param {BackgroundColor} $bg
+/// @param {ThumbBackgroundColor} $thumb-bg
+/// @param {ThumbBackgroundColorHover} $thumb-bg-hover
+@mixin scrollbar-style(
+  $size: 20px,
+  $bg: #ffffff,
+  $thumb-bg: darken(#ffffff, 20%),
+  $thumb-bg-hover: darken(#ffffff, 26%)
+) {
+  ::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+    background: $bg;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 0;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background-color: $thumb-bg;
+    @include background-transition();
+    &:hover {
+      background-color: $thumb-bg-hover;
+    }
+  }
+}
+
+/// Center placeholder attr in element
+@mixin center-placeholder() {
+  width: 100%;
+  height: auto;
+  position: relative;
+
+  &::before {
+    content: attr(placeholder);
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    color: rgba(#000, 0.68);
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    z-index: -1;
+    letter-spacing: 0.2em;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.center-placeholder {
+  @include center-placeholder;
+}
